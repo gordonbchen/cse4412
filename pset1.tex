@@ -1,0 +1,122 @@
+\documentclass[12pt]{exam}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{braket} % provides \ket{}, \bra{}, \braket{}, etc.
+\printanswers
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\title{CSE 4412: Quantum Computing PSet 1}
+\author{Gordon Chen, gbc24001}
+\date{}
+\maketitle
+
+\section{Problem 1}
+What is the probability of observing $\ket{0}$ given the input state $\ket{\psi} = \alpha \ket{+} + \beta \ket{-}$, where $\alpha,\beta \in \mathbb{R}$?
+\begin{solution} \\
+$\ket{+} = \tfrac{1}{\sqrt{2}} (\ket{0} + \ket{1}) \qquad \ket{-} = \tfrac{1}{\sqrt{2}} (\ket{0} - \ket{1})$ \\
+
+$\ket{\psi} = \alpha \ket{+} + \beta \ket{-} = \tfrac{1}{\sqrt{2}} \left[ (\alpha + \beta) \ket{0} + (\alpha - \beta) \ket{1} \right]$ \\
+
+$\braket{0 | \psi} = \tfrac{1}{\sqrt{2}} (\alpha + \beta)$ \\
+
+$\mathbb{P}(\ket{0}) = | \braket{0 | \psi} |^2 = | \tfrac{1}{\sqrt{2}} (\alpha + \beta) |^2$
+$ = \frac{1}{2} (\alpha^2 + \beta^2 + 2 \alpha \beta) = \boxed{\frac{1}{2} + \alpha \beta} \qquad$ since $\alpha^2 + \beta^2 = 1$.
+\end{solution}
+
+
+\section{Problem 2}
+Let $\mathcal{B}_1 = \{\ket{0},\ket{1},\ket{\mathrm{vac}}\}$ be an orthonormal basis for $\mathbb{C}^3$.
+Let $\mathcal{B}_2 = \{\ket{+},\ket{-},\ket{\mathrm{vac}}\}$ be another orthonormal basis for $\mathbb{C}^3$,
+where $\ket{\pm} = \frac{1}{\sqrt{2}}\left(\ket{0} \pm \ket{1}\right)$.
+Note that $\ket{\mathrm{vac}}$ is the same in both bases, and is orthogonal to
+$\ket{0},\ket{1},\ket{+},\ket{-}$.
+
+Given the input state $$\ket{\psi} = \frac{1}{2}\ket{0} + \frac{1}{2}\ket{1} + \frac{1}{\sqrt{2}}\ket{\mathrm{vac}}$$
+what is:
+\begin{enumerate}
+    \item[(a)] The probability of observing $\ket{+}$ if measuring in $\mathcal{B}_2$?
+    \begin{solution}\\
+        $\braket{+ | \phi} = \frac{1}{\sqrt{2}} (\bra{0} + \bra{1})(\frac{1}{2} \ket{0} + \frac{1}{2} \ket{1} + \frac{1}{\sqrt{2}} \ket{\mathrm{vac}})$
+        $ = \frac{1}{2\sqrt{2}} + \frac{1}{2\sqrt{2}} = \frac{1}{\sqrt{2}}$
+
+        $\mathbb{P}(\ket{+}) = |\braket{+ | \phi}|^2 = \boxed{\frac{1}{2}}$
+    \end{solution}
+
+    \item[(b)] The probability of observing $\ket{\mathrm{vac}}$ if measuring in $\mathcal{B}_1$?
+    \begin{solution}\\
+        $\mathbb{P}(\ket{\mathrm{vac}}) = |\braket{\mathrm{vac} | \psi}|^2 = |\frac{1}{\sqrt{2}}|^2 = \boxed{\frac{1}{2}}$
+    \end{solution}
+
+    \item[(c)] The probability of observing $\ket{0}$ conditioned on a first measurement in basis $\mathcal{B}_2$ yielding a result of $\ket{+}$?
+    \begin{solution}\\
+        Observing $\ket{+}$ means that the state collapses to $\ket{+}$.
+
+        $\mathbb{P}(\ket{0}) = |\braket{0|+}|^2 = |\frac{1}{\sqrt{2}}|^2 = \boxed{\frac{1}{2}}$
+    \end{solution}
+
+    \item[(d)] The probability of observing $\ket{\mathrm{vac}}$ conditioned on a first measurement in basis $\mathcal{B}_2$ yielding a result of $\ket{\mathrm{vac}}$?
+    \begin{solution}\\
+        $\mathbb{P}(\ket{\mathrm{vac}}) = \boxed{1}$
+    \end{solution}
+\end{enumerate}
+
+
+\section{Problem 3.}
+The Bell basis for two qubits is:
+$$\ket{\Phi^{+}}=\frac{1}{\sqrt{2}}\bigl(\ket{0,0}+\ket{1,1}\bigr),\qquad
+\ket{\Phi^{-}}=\frac{1}{\sqrt{2}}\bigl(\ket{0,0}-\ket{1,1}\bigr),$$
+
+$$\ket{\Psi^{+}}=\frac{1}{\sqrt{2}}\bigl(\ket{0,1}+\ket{1,0}\bigr),\qquad
+\ket{\Psi^{-}}=\frac{1}{\sqrt{2}}\bigl(\ket{0,1}-\ket{1,0}\bigr).$$
+
+Let $$\ket{\psi}=\sqrt{\frac{3}{4}}\,\ket{0,0}_{AB} + \sqrt{\frac{1}{4}}\,\ket{1,+}_{AB}$$
+
+Answer the following:
+\begin{enumerate}
+    \item[(a)] What is the probability of observing the Bell state $\ket{\Psi^-}$ if a joint measurement on both qubits is performed? What is the post-measurement state if $\ket{\Psi^-}$ is observed?
+    \begin{solution}\\
+        $\braket{\Psi^- | \psi} = \frac{1}{\sqrt{2}} (\bra{0,1} - \bra{1,0}) \ \frac{1}{2} (\sqrt{3} \ket{0,0} + \ket{1,+})$
+
+        $= \frac{1}{2\sqrt{2}} \left[ \sqrt{3} \braket{0,1 | 0,0} + \braket{0,1 | 1,+} - \sqrt{3} \braket{1,0 | 0,0} - \braket{1,0 | 1,+} \right]$
+
+        $= \frac{1}{2\sqrt{2}} \left[\braket{0,1 | 1,+} - \braket{1,0 | 1,+} \right]$
+        $= \frac{1}{2\sqrt{2}} \frac{-1}{\sqrt{2}} = -\frac{1}{4}$
+
+        $\braket{0,1 | 1,+} = \bra{0,1} \frac{1}{\sqrt{2}}(\ket{10} + \ket{11}) = 0$
+
+        $\braket{1,0 | 1,+} = \bra{1,0} \frac{1}{\sqrt{2}} (\ket{1,0} + \ket{1,1}) = \frac{1}{\sqrt{2}}$
+
+        $\mathbb{P}(\ket{\Psi^-}) = | \braket{\Psi | \psi} |^2 = |-\frac{1}{4}|^2 = \boxed{\frac{1}{16}}$
+    \end{solution}
+
+    \item[(b)] What is the probability of observing $\ket{0}$ if a measurement of the $A$ register is made in the $Z$ basis? What is the post-measurement state of both qubits if $\ket{0}$ is observed?
+    \begin{solution}\\
+
+    \end{solution}
+\end{enumerate}
+
+\section{Problem 4.}
+Show that
+\[
+\ket{\Psi^-}=\frac{1}{\sqrt{2}}\bigl(\ket{-,+}-\ket{+,-}\bigr).
+\]
+\begin{solution}\\
+
+\end{solution}
+
+
+\section{Problem 5.}
+What is the resulting quantum state after applying the following operations:
+\[
+\mathrm{CNOT}\,(H\otimes H)\,\ket{+,0}\,?
+\]
+Write your answer in the $Z$ basis.
+\begin{solution}\\
+
+\end{solution}
+
+
+\end{document}
