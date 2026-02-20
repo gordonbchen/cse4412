@@ -1,7 +1,7 @@
 \documentclass[12pt]{exam}
 
 \usepackage[margin=0.75in]{geometry}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{braket} % provides \ket{}, \bra{}, \braket{}, etc.
 \printanswers
 \setlength{\parindent}{0pt}
@@ -90,21 +90,35 @@ Answer the following:
         $\braket{1,0 | 1,+} = \bra{1,0} \frac{1}{\sqrt{2}} (\ket{1,0} + \ket{1,1}) = \frac{1}{\sqrt{2}}$
 
         $\mathbb{P}(\ket{\Psi^-}) = | \braket{\Psi | \psi} |^2 = |-\frac{1}{4}|^2 = \boxed{\frac{1}{16}}$
+
+        If $\ket{\Psi^-}$ is observed, the post-measurement state will be $\ket{\Psi^-}$ because of state collapse.
     \end{solution}
 
     \item[(b)] What is the probability of observing $\ket{0}$ if a measurement of the $A$ register is made in the $Z$ basis? What is the post-measurement state of both qubits if $\ket{0}$ is observed?
     \begin{solution}\\
+    $\ket{\psi}=\sqrt{\frac{3}{4}}\,\ket{0,0}_{AB} + \sqrt{\frac{1}{4}}\,\ket{1,+}_{AB}$
+    $=\frac{\sqrt{3}}{2} \ket{0,0} + \frac{1}{2\sqrt{2}} \ket{1} \otimes (\ket{0} + \ket{1})$
 
+    $=\frac{\sqrt{3}}{2} \ket{0,0} + \frac{1}{2\sqrt{2}} (\ket{10} + \ket{11})$
+
+    $\mathbb{P}(A = \ket{0}) = \mathbb{P}(\ket{00}) = \boxed{3/4}$
+
+    If $\ket{0}$ is observed, then the post-measurement state is $\ket{00}$ because of state collapse.
     \end{solution}
 \end{enumerate}
 
 \section{Problem 4.}
-Show that
-\[
-\ket{\Psi^-}=\frac{1}{\sqrt{2}}\bigl(\ket{-,+}-\ket{+,-}\bigr).
-\]
+Show that: $\qquad \ket{\Psi^-}=\frac{1}{\sqrt{2}}\bigl(\ket{-,+}-\ket{+,-}\bigr)$
 \begin{solution}\\
+$\frac{1}{\sqrt{2}} (\ket{-,+} - \ket{+,-})$ \\
 
+$= \frac{1}{2\sqrt{2}} \bigl[(\ket{0} - \ket{1}) \otimes (\ket{0} + \ket{1}) - (\ket{0} + \ket{1}) \otimes (\ket{0} - \ket{1})\bigr]$ \\
+
+$= \frac{1}{2\sqrt{2}} \bigl[\ket{0,0} + \ket{0,1} - \ket{1,0} - \ket{1,1} - \ket{0,0} + \ket{0,1} - \ket{1,0} + \ket{1,1}\bigr]$ \\
+
+$= \frac{1}{2\sqrt{2}} \bigl(2\ket{0,1} - 2 \ket{1,0}\bigr)$ \\
+
+$= \frac{1}{\sqrt{2}} (\ket{0,1} - \ket{1,0}) = \ket{\Psi^-}$ \qed
 \end{solution}
 
 
