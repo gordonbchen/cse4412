@@ -15,8 +15,9 @@
 
 \section{Problem 1}
 What is the probability of observing $\ket{0}$ given the input state $\ket{\psi} = \alpha \ket{+} + \beta \ket{-}$, where $\alpha,\beta \in \mathbb{R}$?
-\begin{solution} \\
-$\ket{+} = \tfrac{1}{\sqrt{2}} (\ket{0} + \ket{1}) \qquad \ket{-} = \tfrac{1}{\sqrt{2}} (\ket{0} - \ket{1})$ \\
+\begin{solution}\\\\
+$\ket{+} = \tfrac{1}{\sqrt{2}} (\ket{0} + \ket{1})$
+$\qquad \ket{-} = \tfrac{1}{\sqrt{2}} (\ket{0} - \ket{1})$ \\
 
 $\ket{\psi} = \alpha \ket{+} + \beta \ket{-} = \tfrac{1}{\sqrt{2}} \left[ (\alpha + \beta) \ket{0} + (\alpha - \beta) \ket{1} \right]$ \\
 
@@ -38,7 +39,7 @@ Given the input state $$\ket{\psi} = \frac{1}{2}\ket{0} + \frac{1}{2}\ket{1} + \
 what is:
 \begin{enumerate}
     \item[(a)] The probability of observing $\ket{+}$ if measuring in $\mathcal{B}_2$?
-    \begin{solution}\\
+    \begin{solution}\\\\
         $\braket{+ | \phi} = \frac{1}{\sqrt{2}} (\bra{0} + \bra{1})(\frac{1}{2} \ket{0} + \frac{1}{2} \ket{1} + \frac{1}{\sqrt{2}} \ket{\mathrm{vac}})$
         $ = \frac{1}{2\sqrt{2}} + \frac{1}{2\sqrt{2}} = \frac{1}{\sqrt{2}}$
 
@@ -46,19 +47,21 @@ what is:
     \end{solution}
 
     \item[(b)] The probability of observing $\ket{\mathrm{vac}}$ if measuring in $\mathcal{B}_1$?
-    \begin{solution}\\
+    \begin{solution}\\\\
         $\mathbb{P}(\ket{\mathrm{vac}}) = |\braket{\mathrm{vac} | \psi}|^2 = |\frac{1}{\sqrt{2}}|^2 = \boxed{\frac{1}{2}}$
     \end{solution}
 
     \item[(c)] The probability of observing $\ket{0}$ conditioned on a first measurement in basis $\mathcal{B}_2$ yielding a result of $\ket{+}$?
-    \begin{solution}\\
+    \begin{solution}\\\\
         Observing $\ket{+}$ means that the state collapses to $\ket{+}$.
 
         $\mathbb{P}(\ket{0}) = |\braket{0|+}|^2 = |\frac{1}{\sqrt{2}}|^2 = \boxed{\frac{1}{2}}$
     \end{solution}
 
     \item[(d)] The probability of observing $\ket{\mathrm{vac}}$ conditioned on a first measurement in basis $\mathcal{B}_2$ yielding a result of $\ket{\mathrm{vac}}$?
-    \begin{solution}\\
+    \begin{solution}\\\\
+        If $\ket{\mathrm{vac}}$ is observed, then the state collapses to $\ket{\mathrm{vac}}$.
+
         $\mathbb{P}(\ket{\mathrm{vac}}) = \boxed{1}$
     \end{solution}
 \end{enumerate}
@@ -77,17 +80,15 @@ Let $$\ket{\psi}=\sqrt{\frac{3}{4}}\,\ket{0,0}_{AB} + \sqrt{\frac{1}{4}}\,\ket{1
 Answer the following:
 \begin{enumerate}
     \item[(a)] What is the probability of observing the Bell state $\ket{\Psi^-}$ if a joint measurement on both qubits is performed? What is the post-measurement state if $\ket{\Psi^-}$ is observed?
-    \begin{solution}\\
+    \begin{solution}\\\\
         $\braket{\Psi^- | \psi} = \frac{1}{\sqrt{2}} (\bra{0,1} - \bra{1,0}) \ \frac{1}{2} (\sqrt{3} \ket{0,0} + \ket{1,+})$
 
-        $= \frac{1}{2\sqrt{2}} \left[ \sqrt{3} \braket{0,1 | 0,0} + \braket{0,1 | 1,+} - \sqrt{3} \braket{1,0 | 0,0} - \braket{1,0 | 1,+} \right]$
+        $= -\frac{1}{2\sqrt{2}} \braket{1,0 | 1,+}$
 
-        $= \frac{1}{2\sqrt{2}} \left[\braket{0,1 | 1,+} - \braket{1,0 | 1,+} \right]$
-        $= \frac{1}{2\sqrt{2}} \frac{-1}{\sqrt{2}} = -\frac{1}{4}$
+        $= -\frac{1}{4} \bra{1,0} (\ket{1,0} + \ket{1,1})$
 
-        $\braket{0,1 | 1,+} = \bra{0,1} \frac{1}{\sqrt{2}}(\ket{10} + \ket{11}) = 0$
+        $= -\frac{1}{4}$ \\
 
-        $\braket{1,0 | 1,+} = \bra{1,0} \frac{1}{\sqrt{2}} (\ket{1,0} + \ket{1,1}) = \frac{1}{\sqrt{2}}$
 
         $\mathbb{P}(\ket{\Psi^-}) = | \braket{\Psi | \psi} |^2 = |-\frac{1}{4}|^2 = \boxed{\frac{1}{16}}$
 
@@ -95,13 +96,13 @@ Answer the following:
     \end{solution}
 
     \item[(b)] What is the probability of observing $\ket{0}$ if a measurement of the $A$ register is made in the $Z$ basis? What is the post-measurement state of both qubits if $\ket{0}$ is observed?
-    \begin{solution}\\
+    \begin{solution}\\\\
     $\ket{\psi}=\sqrt{\frac{3}{4}}\,\ket{0,0}_{AB} + \sqrt{\frac{1}{4}}\,\ket{1,+}_{AB}$
     $=\frac{\sqrt{3}}{2} \ket{0,0} + \frac{1}{2\sqrt{2}} \ket{1} \otimes (\ket{0} + \ket{1})$
 
     $=\frac{\sqrt{3}}{2} \ket{0,0} + \frac{1}{2\sqrt{2}} (\ket{10} + \ket{11})$
 
-    $\mathbb{P}(A = \ket{0}) = \mathbb{P}(\ket{00}) = \boxed{3/4}$
+    $\mathbb{P}(A = \ket{0}) = \mathbb{P}(\ket{00}) = |\braket{00 | \psi}|^2 = \boxed{3/4}$
 
     If $\ket{0}$ is observed, then the post-measurement state is $\ket{00}$ because of state collapse.
     \end{solution}
@@ -109,7 +110,7 @@ Answer the following:
 
 \section{Problem 4.}
 Show that: $\qquad \ket{\Psi^-}=\frac{1}{\sqrt{2}}\bigl(\ket{-,+}-\ket{+,-}\bigr)$
-\begin{solution}\\
+\begin{solution}\\\\
 $\frac{1}{\sqrt{2}} (\ket{-,+} - \ket{+,-})$ \\
 
 $= \frac{1}{2\sqrt{2}} \bigl[(\ket{0} - \ket{1}) \otimes (\ket{0} + \ket{1}) - (\ket{0} + \ket{1}) \otimes (\ket{0} - \ket{1})\bigr]$ \\
@@ -124,12 +125,18 @@ $= \frac{1}{\sqrt{2}} (\ket{0,1} - \ket{1,0}) = \ket{\Psi^-}$ \qed
 
 \section{Problem 5.}
 What is the resulting quantum state after applying the following operations:
-\[
-\mathrm{CNOT}\,(H\otimes H)\,\ket{+,0}\,?
-\]
+$$\mathrm{CNOT}\,(H\otimes H)\,\ket{+,0}\,?$$
 Write your answer in the $Z$ basis.
-\begin{solution}\\
+\begin{solution}\\\\
+$\mathrm{CNOT} (H \otimes H) \ket{+, 0}$\\
 
+$ = \mathrm{CNOT} \ket{0, +}$\\
+
+$ = \mathrm{CNOT} (\ket{0} \otimes \frac{1}{\sqrt{2}}(\ket{0} + \ket{1}))$\\
+
+$ = \frac{1}{\sqrt{2}} \mathrm{CNOT} (\ket{00} + \ket{01})$\\
+
+$ = \boxed{\frac{1}{\sqrt{2}} (\ket{00} + \ket{01})}$
 \end{solution}
 
 
