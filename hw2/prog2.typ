@@ -19,10 +19,13 @@
   [*TODO:* #body],
 )
 
-#let ket(x) = $|#x angle.r$
-#let bra(x) = $angle.l #x |$
-#let braket(a, b) = $angle.l #a | #b angle.r$
-
+#let t = h(0.1em)
+#let ket(x) = $lr(|#t #x #t chevron.r)$
+#let ket2(x,y) = $lr(|#t #x,#t #y #t chevron.r)$
+#let bra(x) = $lr(chevron.l #t #x #t|)$
+#let bra2(x,y) = $lr(chevron.l #t #x,#t #y #t|)$
+#let braket(x,y) = $lr(chevron.l #t #x #t|#t #y #t chevron.r)$
+#let braket2(x1,y1,x2,y2) = $lr(chevron.l #t #x1,#t #y1 #t|#t #x2,#t #y2 #t chevron.r)$
 
 #align(center)[
   #text(22pt, weight: "bold")[Quantum Prog 2]
@@ -49,7 +52,19 @@ The probability the measurement outcome is $s$ is exactly 1.
   - Briefly describe and justify your design.
 
     #solution[
+      We follow Deutsch-Joza:
+      + $3$ input wires, initial state $ket(001)$
+      + $H^(times.o 3)$
+      + $U_f$ :
 
+        $
+        U_f ket2(x, y) &= ket2(x, f(x) xor y) = ket2(x, (x dot s) xor y) = ket2(x, (0 x_0 xor 1 x_1) xor y) \
+        &= ket2(x, x_1 xor y)
+        $
+
+        So $U_f$ just needs a CNOT from $x_1$ to $y$.
+
+      + $H^(times.o 2)$
     ]
 
 
@@ -58,7 +73,10 @@ The probability the measurement outcome is $s$ is exactly 1.
     and include it in your write-up.
 
     #solution[
+      #image("img/bv.png")
 
+      After throwing away the last qubit, the quantum state will be $ket(01)$. Measuring will give us
+      $s = 01$, which is the correct output.
     ]
 
 
@@ -67,7 +85,17 @@ The probability the measurement outcome is $s$ is exactly 1.
     the output from the IBM Quantum Composer.
 
     #solution[
+      $
+      H^(times.o 3) ket(001) &= ket(++-) \
+      &= 1/(sqrt(2)^3) (ket(0) + ket(1)) (ket(0) + ket(1)) (ket(0) - ket(1)) \
+      &= 1/(sqrt(2)^3) (ket(00) + ket(01) + ket(10) + ket(11)) (ket(0) - ket(1)) \
+      &= 1/(sqrt(2)^3) (ket(000)+ket(010)+ket(100)+ket(110)-ket(001)-ket(011)-ket(101)-ket(111)) \
+      $
 
+      #image("img/bv_inith.png")
+
+      The state after the inital H gates is an equal superposition of all states where the states with a $ket(1)$
+      in the last register have a negative phase.
     ]
 
 
@@ -75,7 +103,14 @@ The probability the measurement outcome is $s$ is exactly 1.
     with the output from the IBM Quantum Composer.
 
     #solution[
+      $
+      U_f 1/(sqrt(2)^3) (ket(000)+ket(010)+ket(100)+ket(110)-ket(001)-ket(011)-ket(101)-ket(111))\
+      = 1/(sqrt(2)^3) (ket(000)+ket(011)+ket(100)+ket(111)-ket(001)-ket(010)-ket(101)-ket(110)) \
+      $
 
+      #image("img/bv_uf.png")
+
+      The states with negative phases are $ket(001), ket(010), ket(101), ket(110)$.
     ]
 
 
@@ -83,7 +118,17 @@ The probability the measurement outcome is $s$ is exactly 1.
     measurement)? Again, verify what you get by hand.
 
     #solution[
+      $
+      &H^(times.o 2) 1/(sqrt(2)^3) (ket(000)+ket(011)+ket(100)+ket(111)-ket(001)-ket(010)-ket(101)-ket(110)) \
+      &=H^(times.o 2) 1/(sqrt(2)^3) (ket(00)-ket(01)+ket(10)-ket(11))ket(-) \
+      &=H^(times.o 2) 1/(sqrt(2)^2) (ket(00)-ket(01)+ket(10)-ket(11)) wide "discarding last qubit"\
+      &=H^(times.o 2) ket(+-)\
+      &=ket(01)\
+      $
 
+      #image("img/bv_final.png")
+
+      The state is $ket(01)$ after discarding the last qubit.
     ]
 
 
@@ -91,6 +136,17 @@ The probability the measurement outcome is $s$ is exactly 1.
 show the circuit.
 
 #solution[
+  + 4 wires, initial state $ket(0001)$
+  + $H^(times.o 4)$
+  + $U_f$
 
+    $U_f ket2(x, y) = ket2(x, (x dot 101) xor y) = ket2(x, x_0 xor x_2 xor y)$
+
+    So we CNOT $x_0$ to $y$ and $x_2$ to $y$ to make $U_f$.
+
+  + $H^(times.o 3)$
+
+  #image("img/bv3.png")
+
+  After throwing away the last qubit the state is $ket(101)$, which will be $s=101$ when measured.
 ]
-
