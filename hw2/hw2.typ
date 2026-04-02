@@ -95,7 +95,7 @@ Let $N = 21 = 3 times 7$ which we wish to factor. Solve the following problems:
   #solution[
     $1/sqrt(Q) sum_(a=0)^(Q-1) ket(a) ket(x^a mod 21)$
 
-    $= 1/sqrt(Q) (ket(0)ket(1)+ket(1)ket(10)+ket(2)ket(16)+ket(3)ket(13)+ket(4)(4)+ket(5)ket(19)+ket(6)ket(1)+...)$
+    $= 1/sqrt(444) (ket(0)ket(1)+ket(1)ket(10)+ket(2)ket(16)+ket(3)ket(13)+ket(4)(4)+ket(5)ket(19)+ket(6)ket(1)+...)$
   ]
 
 
@@ -106,5 +106,7 @@ Let $N = 21 = 3 times 7$ which we wish to factor. Solve the following problems:
   #solution[
     The second register collapses to $ket(16)$. Then the post-measurement state becomes:
 
-    $= 1/sqrt(Q/6) (ket(2)ket(16)+ket(8)ket(16)+ket(14)ket(16)+...)$
+    $= 1/sqrt(444/6) (ket(2)ket(16)+ket(8)ket(16)+ket(14)ket(16)+...)$
+
+    $= 1/sqrt(74) (ket(2)ket(16)+ket(8)ket(16)+ket(14)ket(16)+...)$
   ]
