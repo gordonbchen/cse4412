@@ -82,9 +82,9 @@ Let $N = 21 = 3 times 7$ which we wish to factor. Solve the following problems:
     Let $Q = 444$. $Q/r = 442 / 6 = 74$ and $Q >= N^2 = 21^2 = 441$.
   ]
 
-#let ket(x) = $|#x angle.r$
+#let ket(x) = $|#x chevron.r$
 #let bra(x) = $angle.l #x |$
-#let braket(a, b) = $angle.l #a | #b angle.r$
+#let braket(a, b) = $angle.l #a | #b chevron.r$
 + From your choices above, compute the following:
 
   $ 1/sqrt(Q) sum_(a=0)^(Q-1) ket(a) ket(x^a mod 21) $
