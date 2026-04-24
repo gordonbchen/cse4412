@@ -79,3 +79,47 @@
   $X$ basis then $k=0$. So then in both cases for $k=0$ and $k=1$, the adversary just sees classical messages
   of 2 states, 1 random in the $X$ basis and 1 random in the $Z$ basis, so he cannot tell what $k$ is.
 ]
+
+= Proof of Deletion
++ $r_Z, r_X in {0, 1}^n$.
++ $b in {Z, X}^(2n)$, where half are $Z$.
++ $ket(psi)_i$ is $ket(r_Z)$ if $b_i = Z$, else $H ket(r_X)$ when $b_i = X$.
++ $c = (m xor k xor r_Z, ket(psi))$
++ secret key = $(k, b, r_X)$, throw out $r_Z$
++ proof of deletion: server measures $ket(psi)$ in the $X$ basis, measurement must have $r_X$ where $b=X$.
+
+#solution[
+  For someone with the secret key $(k, b, r_X)$ to decrypt the ciphertext $c = (m xor k xor r_Z, ket(psi))$,
+  they already have $k$, so they just need to find $r_Z$ (remember this was thrown away)
+  from $b$ and $ket(psi)$. They can find $r_Z$ by measuring $ket(psi)_i$ in the $Z$ basis where $b_i = Z$.
+  Then they can decrypt with $m = c xor k xor r_Z$.
+
+  So $r_Z$ is stored in $ket(psi)$ in the qubits where $b_i = Z$.
+
+  For a proof of deletion then, the server measures all of $ket(psi)$ in the $X$ basis, which will cause
+  the qubits where $r_Z$ is stored to collapse uniform randomly to $ket(+)$ or $ket(-)$. Then $r_Z$ will
+  not be able to be recovered.
+
+  A malicious server cannot fake measuring all of $ket(psi)$ and secretly store $ket(psi)$ for future
+  attacks either. Since the person with the secret key will check that the measured bits when
+  $b_i = X$ match $r_X$, the server has to measure all qubits where $b_i = X$ in the $X$ basis.
+  However, the server doesn't know $b$, it is part of the secret key, so to get all $r_X$ correct,
+  it really does have to measure all $ket(psi)$ in the X basis.
+
+  Otherwise, for every qubit the server doesn't measure and instead randomly guesses because the server
+  wants to preserve as many $r_Z$ qubits as possible, the probability that the server's malicious behavior
+  goes undetected is $3/4$. There is a $1/2$ probability that the qubit was in the $Z$ basis, in which
+  case the measured state would have been random so the user doesn't check it, and a $1/4$ probability
+  that even though that qubit was in the $X$ basis and the user did check it, the server guessed correctly.
+  The other $1/4$ chance is when the qubit is in the $X$ basis, the server guessed wrong, and the user
+  would have detected that the proof of deletion is invalid. So for every bit the server doesn't measure,
+  its probability of avoiding detection is multiplied by $3/4$, so if it saves all $2n$ bits so that
+  it is guarenteed to be able to find $r_Z$ later on when $b$ is leaked is $(3/4)^(2n)$ which is
+  astronomically small for large $n$.
+
+  Even if later, the secret key $(k, b, r_X)$ is leaked, no one will be able to decrypt the ciphertext
+  $c = (m xor k xor r_Z, ket(psi))$ because no one can find $r_Z$ anymore. The qubits in $ket(psi)$ that
+  were storing $r_Z$ were all measured in the $X$ basis, which caused them to collapse to random states
+  in the $X$ basis, so $r_Z$ is unrecoverable. Even with $k$ leaked, the xoring with $r_Z$ acts as a
+  One Time Pad on $m xor k$, which is completely secure.
+]
