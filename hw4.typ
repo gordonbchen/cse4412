@@ -91,7 +91,8 @@
 #solution[
   For someone with the secret key $(k, b, r_X)$ to decrypt the ciphertext $c = (m xor k xor r_Z, ket(psi))$,
   they already have $k$, so they just need to find $r_Z$ (remember this was thrown away)
-  from $b$ and $ket(psi)$. They can find $r_Z$ by measuring $ket(psi)_i$ in the $Z$ basis where $b_i = Z$.
+  from $b$ and $ket(psi)$. They can find $r_Z$ by asking the server to measure all of $ket(psi)$ in the
+  $Z$ basis, and the bits of $r_Z$ are in the positions where $b_i = Z$.
   Then they can decrypt with $m = c xor k xor r_Z$.
 
   So $r_Z$ is stored in $ket(psi)$ in the qubits where $b_i = Z$.
@@ -106,16 +107,9 @@
   However, the server doesn't know $b$, it is part of the secret key, so to get all $r_X$ correct,
   it really does have to measure all $ket(psi)$ in the X basis.
 
-  Otherwise, for every qubit the server doesn't measure and instead randomly guesses because the server
-  wants to preserve as many $r_Z$ qubits as possible, the probability that the server's malicious behavior
-  goes undetected is $3/4$. There is a $1/2$ probability that the qubit was in the $Z$ basis, in which
-  case the measured state would have been random so the user doesn't check it, and a $1/4$ probability
-  that even though that qubit was in the $X$ basis and the user did check it, the server guessed correctly.
-  The other $1/4$ chance is when the qubit is in the $X$ basis, the server guessed wrong, and the user
-  would have detected that the proof of deletion is invalid. So for every bit the server doesn't measure,
-  its probability of avoiding detection is multiplied by $3/4$, so if it saves all $2n$ bits so that
-  it is guarenteed to be able to find $r_Z$ later on when $b$ is leaked is $(3/4)^(2n)$ which is
-  astronomically small for large $n$.
+  If the server tried to not measure $ket(psi)$ and just guess $r_X$, then they would have no better
+  than to guess random bits, so the probability of forging a fake proof of deletion is $1/2^n$, which
+  is negligible.
 
   Even if later, the secret key $(k, b, r_X)$ is leaked, no one will be able to decrypt the ciphertext
   $c = (m xor k xor r_Z, ket(psi))$ because no one can find $r_Z$ anymore. The qubits in $ket(psi)$ that
